@@ -16,15 +16,14 @@ namespace API.Controllers
             string articleData = "Data not set";
             try
             {
-                Console.WriteLine("Connecting to MySQL");
                 conn.Open();
-                string sql = "SELECT * FROM Article";
+                string Id = "1";
+                string sql = $"SELECT ArticleData FROM Article where Id = {Id}";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    Console.WriteLine(rdr[0] + " -- " + rdr[1]);
-                    articleData = rdr[1].ToString();
+                    articleData = rdr[0].ToString();
                 }
                 rdr.Close();
             }
@@ -32,10 +31,8 @@ namespace API.Controllers
             {
                 Console.WriteLine(ex.ToString());
             }
-
             conn.Close();
-            Console.WriteLine("Done, closed MySQL connection");
-            System.Console.WriteLine(articleData);
+            Console.WriteLine(articleData);
             return articleData;
         }
 
