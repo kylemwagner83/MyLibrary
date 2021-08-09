@@ -8,17 +8,16 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class ArticleController : ControllerBase
     {
-        [HttpGet]
-        public string GetArticle()
+        [HttpGet("{id}")]
+        public string GetArticle(int id)
         {
             string connStr = "server=localhost;user=root;database=library;port=3306;password=Pa$$w0rd";
             MySqlConnection conn = new MySqlConnection(connStr);
-            string articleData = "Data not set";
+            string articleData = "Data not retrieved";
             try
             {
                 conn.Open();
-                string Id = "1";
-                string sql = $"SELECT ArticleData FROM Article where Id = {Id}";
+                string sql = $"SELECT ArticleData FROM Article where Id = {id}";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -32,7 +31,6 @@ namespace API.Controllers
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            Console.WriteLine(articleData);
             return articleData;
         }
 
