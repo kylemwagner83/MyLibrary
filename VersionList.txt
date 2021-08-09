@@ -1,0 +1,12 @@
+nvm-windows     1.1.7 (coreybutler)
+NPM             6.14.14
+Node            14.17.4
+NG CLI          12.1.4
+Bootstrap       4.5.3
+NGX-Bootstrap   7.0.0
+Font-awesome    4.7.0
+tinyMCE         5.8.2
+
+dotnet          5.0.8
+MySQL Server	8.0.26
+Connector/NET	8.0.26
