@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
+  articleData = "Default";
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+      this.http.get("https://localhost:5001/api/article/1").subscribe((response: any) => {
+        this.articleData = response["articleData"];
+    }, error => {
+      console.log(error);
+    })
   }
 
 }

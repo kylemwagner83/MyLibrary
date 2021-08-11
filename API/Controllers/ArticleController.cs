@@ -1,4 +1,5 @@
 using System;
+using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 
@@ -16,9 +17,10 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public string GetArticle(int id)
+        public Article GetArticle(int id)
         {
             string articleData = "Data not retrieved";
+            Article currentArticle = new Article();
             try
             {
                 conn.Open();
@@ -28,6 +30,8 @@ namespace API.Controllers
                 while (rdr.Read())
                 {
                     articleData = rdr[0].ToString();
+                    currentArticle.Id = id;
+                    currentArticle.ArticleData = rdr[0].ToString();
                 }
                 rdr.Close();
             }
@@ -36,26 +40,34 @@ namespace API.Controllers
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            return articleData;
+            return currentArticle;
         }
 
         [HttpPost("{id}")]
-        public string SaveArticle(int id)
+
+        // public string SaveArticle(int id)
+        // {
+        //     try
+        //     {
+        //         int randNum = new Random().Next(1, 100);
+        //         conn.Open();
+        //         string sql = $"UPDATE Article SET ArticleData = '{randNum}' WHERE Id = {id}";
+        //         MySqlCommand cmd = new MySqlCommand(sql, conn);
+        //         cmd.ExecuteNonQuery();
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         Console.WriteLine(ex.ToString());
+        //     }
+        //     conn.Close();
+        //     return "Updated article";
+        // }
+
+        public RedirectResult PostArticle()
         {
-            try
-            {
-                int randNum = new Random().Next(1, 100);
-                conn.Open();
-                string sql = $"UPDATE Article SET ArticleData = '{randNum}' WHERE Id = {id}";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            conn.Close();
-            return "Updated article";
+            string articleData = Request.Form["article-data"];
+            System.Console.WriteLine(articleData);
+            return Redirect("https://localhost:4200/");
         }
 
     }
