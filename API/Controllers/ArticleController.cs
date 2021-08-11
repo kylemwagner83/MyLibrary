@@ -19,7 +19,6 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public Article GetArticle(int id)
         {
-            string articleData = "Data not retrieved";
             Article currentArticle = new Article();
             try
             {
@@ -29,7 +28,6 @@ namespace API.Controllers
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    articleData = rdr[0].ToString();
                     currentArticle.Id = id;
                     currentArticle.ArticleData = rdr[0].ToString();
                 }
@@ -44,29 +42,23 @@ namespace API.Controllers
         }
 
         [HttpPost("{id}")]
-
-        // public string SaveArticle(int id)
-        // {
-        //     try
-        //     {
-        //         int randNum = new Random().Next(1, 100);
-        //         conn.Open();
-        //         string sql = $"UPDATE Article SET ArticleData = '{randNum}' WHERE Id = {id}";
-        //         MySqlCommand cmd = new MySqlCommand(sql, conn);
-        //         cmd.ExecuteNonQuery();
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         Console.WriteLine(ex.ToString());
-        //     }
-        //     conn.Close();
-        //     return "Updated article";
-        // }
-
-        public RedirectResult PostArticle()
+        public RedirectResult PostArticle(int id)
         {
-            string articleData = Request.Form["article-data"];
-            System.Console.WriteLine(articleData);
+            try
+            {
+                Article currentArticle = new Article();
+                currentArticle.Id = id;
+                currentArticle.ArticleData = Request.Form["article-data"];
+                conn.Open();
+                string sql = $"UPDATE Article SET ArticleData = '{currentArticle.ArticleData}' WHERE Id = {currentArticle.Id}";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn.Close();
             return Redirect("https://localhost:4200/");
         }
 

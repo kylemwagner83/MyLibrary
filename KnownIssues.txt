@@ -1,0 +1,1 @@
+Article page loads html before getting content from database
