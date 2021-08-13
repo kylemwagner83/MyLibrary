@@ -16,19 +16,19 @@ namespace API.Controllers
             conn = new MySqlConnection(connStr);
         }
 
-        [HttpGet("{id}")]
-        public Article GetArticle(int id)
+        [HttpGet("{articleId}")]
+        public Article GetArticle(int articleId)
         {
             Article currentArticle = new Article();
             try
             {
                 conn.Open();
-                string sql = $"SELECT ArticleData FROM Article WHERE Id = {id}";
+                string sql = $"SELECT ArticleData FROM Article WHERE ArticleId = {articleId}";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    currentArticle.Id = id;
+                    currentArticle.ArticleId = articleId;
                     currentArticle.ArticleData = rdr[0].ToString();
                 }
                 rdr.Close();
@@ -41,16 +41,16 @@ namespace API.Controllers
             return currentArticle;
         }
 
-        [HttpPost("{id}")]
-        public RedirectResult PostArticle(int id)
+        [HttpPost("{articleId}")]
+        public RedirectResult PostArticle(int articleId)
         {
             try
             {
                 Article currentArticle = new Article();
-                currentArticle.Id = id;
+                currentArticle.ArticleId = articleId;
                 currentArticle.ArticleData = Request.Form["article-data"];
                 conn.Open();
-                string sql = $"UPDATE Article SET ArticleData = '{currentArticle.ArticleData}' WHERE Id = {currentArticle.Id}";
+                string sql = $"UPDATE Article SET ArticleData = '{currentArticle.ArticleData}' WHERE ArticleId = {currentArticle.ArticleId}";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
             }

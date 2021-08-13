@@ -1,0 +1,13 @@
+Features to be implemented
+
+- Select article ID for load/save
+- Add references for linked articles/series
+- Create home page
+
+
+
+Known Issues
+
+- Article component loads html before getting content from database on first run
+- No warning when approaching/exceeding char limit
+- If save fails, page content is lost

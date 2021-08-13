@@ -1,3 +1,20 @@
-<h1>{{title}}</h1>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" routerLink="/home-component"
+        routerLinkActive='active'>{{title}}</a>
+</nav>
 
-<app-article></app-article>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 bg-dark sidebar pt-3">
+            <ul class="nav nav-sidebar d-inline">
+                <li><a class="navlink" routerLink="/home-component" 
+                    routerLinkActive='active'>Home</a></li>
+                <li><a class="navlink" routerLink="/article-component" 
+                    routerLinkActive='active'>Article</a></li>
+            </ul>
+        </div>
+        <div class="col-10">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
