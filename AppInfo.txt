@@ -8,6 +8,7 @@ Features to be implemented
 
 Known Issues
 
-- Article component loads html before getting content from database on first run
+- Article component loads html before getting content from database
+    - use API resolver in angular?
 - No warning when approaching/exceeding char limit
-- If save fails, page content is lost
+- If save fails, page still reloads and any updated content is lost
