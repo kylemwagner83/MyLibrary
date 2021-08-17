@@ -9,6 +9,7 @@ NGX-Bootstrap   7.0.0
 Font-awesome    4.7.0
 
 tinyMCE         5.8.2
+ngx-tinymce    12.0.0
 
 MySQL Server	8.0.26
 Connector/NET	8.0.26

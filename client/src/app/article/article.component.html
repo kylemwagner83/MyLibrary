@@ -1,4 +1,15 @@
-<form action="https://localhost:5001/api/article/1/" method="post">
-    <textarea id="mytextarea" name="article-data">{{articleData}}</textarea>
-    <button type="submit">Save</button>
-</form>
+<h1>TinyMCE 5 Angular Demo</h1>
+<editor 
+    apiKey="k1pqab9inei7an7n3atynsphluumlmwkih79kuzncj48xh3y" 
+    [init]="{
+        height: 500,
+        menubar: false,
+        plugins: [
+        'advlist autolink code hr image imagetools lists save wordcount'
+        ],
+        toolbar:
+        'save | undo redo | formatselect | bold italic underline backcolor | \
+        alignleft aligncenter alignright alignjustify | \
+        bullist numlist outdent indent | removeformat hr| code | wordcount'
+    }">
+</editor>

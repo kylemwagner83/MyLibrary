@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ArticleResolverService } from './article/article-resolver.service';
 import { ArticleComponent } from './article/article.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: 'article-component', component: ArticleComponent },
+  { path: 'article-component', component: ArticleComponent, resolve: {article: ArticleResolverService} },
   { path: 'home-component', component: HomeComponent }
 ];
 
