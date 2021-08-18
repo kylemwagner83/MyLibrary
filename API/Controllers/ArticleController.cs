@@ -42,24 +42,26 @@ namespace API.Controllers
         }
 
         [HttpPost("{articleId}")]
-        public RedirectResult PostArticle(int articleId)
+        // public RedirectResult PostArticle(int articleId)
+        public void PostArticle(int articleId)
         {
             try
             {
                 Article currentArticle = new Article();
                 currentArticle.ArticleId = articleId;
                 currentArticle.ArticleData = Request.Form["article-data"];
-                conn.Open();
-                string sql = $"UPDATE Article SET ArticleData = '{currentArticle.ArticleData}' WHERE ArticleId = {currentArticle.ArticleId}";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.ExecuteNonQuery();
+                Console.WriteLine(Request.Form["article-data"]);
+                // conn.Open();
+                // string sql = $"UPDATE Article SET ArticleData = '{currentArticle.ArticleData}' WHERE ArticleId = {currentArticle.ArticleId}";
+                // MySqlCommand cmd = new MySqlCommand(sql, conn);
+                // cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            return Redirect("https://localhost:4200/");
+            // return Redirect("https://localhost:4200/");
         }
 
     }

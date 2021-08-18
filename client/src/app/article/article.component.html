@@ -1,15 +1,24 @@
-<h1>TinyMCE 5 Angular Demo</h1>
-<editor 
-    apiKey="k1pqab9inei7an7n3atynsphluumlmwkih79kuzncj48xh3y" 
-    [init]="{
-        height: 500,
-        menubar: false,
-        plugins: [
-        'advlist autolink code hr image imagetools lists save wordcount'
-        ],
-        toolbar:
-        'save | undo redo | formatselect | bold italic underline backcolor | \
-        alignleft aligncenter alignright alignjustify | \
-        bullist numlist outdent indent | removeformat hr| code | wordcount'
-    }">
-</editor>
+<div class="container">
+    <h2>
+      {{articleTitle}}
+    </h2>
+  
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
+      <div class="form-group">
+        <editor 
+            formControlName='content' 
+            apiKey="k1pqab9inei7an7n3atynsphluumlmwkih79kuzncj48xh3y" 
+            [init]="{      
+                height: 500,
+                menubar: false,
+                plugins: 'advlist autolink code hr image imagetools lists save wordcount',
+                toolbar: 'save | undo redo | formatselect | bold italic underline backcolor | \
+                    alignleft aligncenter alignright alignjustify | \
+                    bullist numlist outdent indent | removeformat hr| code | wordcount'
+            }"
+        >
+        </editor>
+      </div>
+      <button class="btn btn-dark" type="submit">Submit Form</button>
+    </form>
+  </div>

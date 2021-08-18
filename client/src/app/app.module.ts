@@ -9,6 +9,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: 'article-component', component: ArticleComponent }
@@ -19,7 +21,8 @@ const routes: Routes = [
     AppComponent,
     ArticleComponent,
     HomeComponent,
-    SideNavComponent
+    SideNavComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,9 @@ const routes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule,
-    EditorModule
+    EditorModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     RouterModule

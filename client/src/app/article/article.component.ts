@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from './article';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-article',
@@ -8,15 +9,29 @@ import { Article } from './article';
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
-  articleData!: Article;
-  
-  constructor(private activatedRoute: ActivatedRoute) { }
+  articleObject!: Article;
+  formGroup;
+  articleTitle = 'Stupid title'
+  articleContent = 'test'
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder) {
+      this.formGroup = this.formBuilder.group({
+        content: this.articleContent
+      });
+   }
 
   ngOnInit(): void {
 
     this.activatedRoute.data.subscribe((response: any) => {
-      this.articleData = response.article;
+      this.articleObject = response.article;
     });
+  }
+  
+  onSubmit (formData:any) {
+    var name = formData;
+    console.log(name);
   }
 
 }
