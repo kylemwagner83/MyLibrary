@@ -23,13 +23,17 @@ namespace API.Controllers
             try
             {
                 conn.Open();
-                string sql = $"SELECT ArticleData FROM Article WHERE ArticleId = {articleId}";
+                string sql = $"SELECT ArticleTitle, ArticleData, SeriesId, SeriesPosition, CategoryId FROM Article WHERE ArticleId = {articleId}";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
                     currentArticle.ArticleId = articleId;
-                    currentArticle.ArticleData = rdr[0].ToString();
+                    currentArticle.ArticleTitle = rdr[0].ToString();
+                    currentArticle.ArticleData = rdr[1].ToString();
+                    currentArticle.SeriesId = Convert.ToInt32(rdr[2]);
+                    currentArticle.SeriesPosition = Convert.ToInt32(rdr[3]);
+                    currentArticle.CategoryId = Convert.ToInt32(rdr[4]);
                 }
                 rdr.Close();
             }

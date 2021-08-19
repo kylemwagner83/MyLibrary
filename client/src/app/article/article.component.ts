@@ -12,7 +12,6 @@ import { FormBuilder } from '@angular/forms';
 export class ArticleComponent implements OnInit {
   article!: IArticle;
   formGroup:any;
-  articleId:any;
   
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -20,20 +19,18 @@ export class ArticleComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.articleId = this.activatedRoute.snapshot.paramMap.get("id");
-
     this.activatedRoute.data.subscribe((response: any) => {
       this.article = response.article;
     });
-    
+  
     this.formGroup = this.formBuilder.group({
       content: this.article.articleData
     });    
   }
   
   onSubmit (formData:any) {
-    var name = formData;
-    console.log(name);
+    var content = formData;
+    console.log(content);
   }
 
 }
