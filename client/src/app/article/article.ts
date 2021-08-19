@@ -1,4 +1,4 @@
-export interface Article {
+export interface IArticle {
     articleId: number;
     articleTitle: string;
     articleData: string;

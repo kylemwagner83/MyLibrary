@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
-  { path: 'article-component', component: ArticleComponent, resolve: {article: ArticleResolverService} },
+  { path: 'article-component/:id', component: ArticleComponent, resolve: {article: ArticleResolverService} },
   { path: 'home-component', component: HomeComponent },
   { path: '', component: HomeComponent },
   { path: '**', component: NotfoundComponent },

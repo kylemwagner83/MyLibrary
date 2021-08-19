@@ -1,7 +1,10 @@
 <div class="container">
     <h2>
-      {{articleTitle}}
+      {{article.articleTitle}}
     </h2>
+    <p>
+      Article ID# {{articleId}}
+    </p>
   
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
       <div class="form-group">
