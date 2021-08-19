@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,11 +9,13 @@ import { Observable } from 'rxjs';
 export class ArticleService {
   url = "https://localhost:5001/api/article/";
 
-  constructor(
-    public http: HttpClient
-    ) { }
+  constructor(private http: HttpClient) { }
 
   getArticle(id:any): Observable<any> {
     return this.http.get(this.url + id);
+  }
+
+  saveArticleContent(id:any, content:any) {
+    this.http.post(this.url + id, content).subscribe();
   }
 }

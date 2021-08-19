@@ -46,26 +46,28 @@ namespace API.Controllers
         }
 
         [HttpPost("{articleId}")]
-        // public RedirectResult PostArticle(int articleId)
-        public void PostArticle(int articleId)
+        public void PostArticle(int articleId, Article article) // This should probably return a status
         {
             try
             {
                 Article currentArticle = new Article();
-                currentArticle.ArticleId = articleId;
-                currentArticle.ArticleData = Request.Form["article-data"];
-                Console.WriteLine(Request.Form["article-data"]);
-                // conn.Open();
-                // string sql = $"UPDATE Article SET ArticleData = '{currentArticle.ArticleData}' WHERE ArticleId = {currentArticle.ArticleId}";
-                // MySqlCommand cmd = new MySqlCommand(sql, conn);
-                // cmd.ExecuteNonQuery();
+                currentArticle.ArticleId = article.ArticleId;
+                currentArticle.ArticleTitle = article.ArticleTitle;
+                currentArticle.ArticleData = article.ArticleData;
+                currentArticle.SeriesId = article.SeriesId;
+                currentArticle.SeriesPosition = article.SeriesPosition;
+                currentArticle.CategoryId = article.CategoryId;
+
+                conn.Open();
+                string sql = $"UPDATE Article SET ArticleData = '{currentArticle.ArticleData}' WHERE ArticleId = {currentArticle.ArticleId}";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
-            // return Redirect("https://localhost:4200/");
         }
 
     }
