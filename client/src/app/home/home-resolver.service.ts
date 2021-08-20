@@ -2,20 +2,19 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators'
-import { ArticleService } from './article.service';
+import { ArticleService } from '../article/article.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ArticleResolverService implements Resolve<any> {
+export class HomeResolverService implements Resolve<any> {
   id:any;
 
   constructor(private article: ArticleService) { 
   }
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-    this.id = route.params['id']
-    return this.article.getArticle(this.id).pipe(
+    return this.article.getArticlesWithoutContent().pipe(
       catchError(error => {
         return ('No data');
       })

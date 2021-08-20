@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { IArticle } from './article';
 import { FormBuilder } from '@angular/forms';
 import { ArticleService } from './article.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-article',
@@ -34,7 +33,7 @@ export class ArticleComponent implements OnInit {
   
   onSubmit (formData:any) {
     this.article.articleData = formData["content"];
-    this.articleService.saveArticleContent(this.article.articleId, this.article);
+    this.articleService.saveArticle(this.article.articleId, this.article);
   }
 
 

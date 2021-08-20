@@ -15,7 +15,11 @@ export class ArticleService {
     return this.http.get(this.url + id);
   }
 
-  saveArticleContent(id:any, content:any) {
+  getArticlesWithoutContent(): Observable<any> {
+    return this.http.get(this.url);
+  }
+
+  saveArticle(id:any, content:any) {
     this.http.post(this.url + id, content).subscribe();
   }
 }
