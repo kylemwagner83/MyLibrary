@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -21,5 +21,11 @@ export class ArticleService {
 
   saveArticle(id:any, content:any) {
     this.http.post(this.url + id, content).subscribe();
+  }
+
+  createNewArticle(content:any) {
+    this.http.post(this.url, content).subscribe(x => {
+      window.location.reload();
+    });
   }
 }

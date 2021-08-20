@@ -77,20 +77,12 @@ namespace API.Controllers
         }
 
         [HttpPost("{articleId}")]
-        public void PostArticle(int articleId, Article article) // This should probably return a status
+        public void UpdateArticle(int articleId, Article article) // This should probably return something
         {
             try
             {
-                Article currentArticle = new Article();
-                currentArticle.ArticleId = article.ArticleId;
-                currentArticle.ArticleTitle = article.ArticleTitle;
-                currentArticle.ArticleData = article.ArticleData;
-                currentArticle.SeriesId = article.SeriesId;
-                currentArticle.SeriesPosition = article.SeriesPosition;
-                currentArticle.CategoryId = article.CategoryId;
-
                 conn.Open();
-                string sql = $"UPDATE Article SET ArticleData = '{currentArticle.ArticleData}' WHERE ArticleId = {currentArticle.ArticleId}";
+                string sql = $"UPDATE Article SET ArticleData = '{article.ArticleData}' WHERE ArticleId = {article.ArticleId}";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
             }
@@ -100,6 +92,26 @@ namespace API.Controllers
             }
             conn.Close();
         }
+
+        [HttpPost]
+        public IActionResult CreateNewArticle(Article article)
+        {
+            try
+            {
+                conn.Open();
+                string sql = $"insert into Article (ArticleId, ArticleTitle, ArticleData, SeriesId, SeriesPosition, CategoryId) values ({article.ArticleId}, '{article.ArticleTitle}', '{article.ArticleData}', {article.SeriesId}, {article.SeriesPosition}, {article.CategoryId});";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn.Close();
+            return Ok(article);
+        }
+
+
 
     }
 }

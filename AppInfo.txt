@@ -1,12 +1,12 @@
 Features to be implemented
 
-- Select article ID for load/save
-- Add references for linked articles/series
-- Create home page
-
+- Edit article title
+- Edit article category, edit categories list
+- Create new aritcle in series, add series title?
+    - Edit seriesId/seriesPosition?
 
 
 Known Issues
 
 - No warning when approaching/exceeding char limit
-- If save fails, page still reloads and any updated content is lost
+- ??If save fails, page still reloads and any updated content is lost
