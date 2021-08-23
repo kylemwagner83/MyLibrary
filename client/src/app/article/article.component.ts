@@ -12,8 +12,10 @@ import { ArticleService } from './article.service';
 
 export class ArticleComponent implements OnInit {
   article!: IArticle;
-  formGroup:any;
-  
+  editorForm:any;
+  titleForm:any;
+  h = window.innerHeight; 
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -26,15 +28,19 @@ export class ArticleComponent implements OnInit {
       this.article = response.article;
     });
   
-    this.formGroup = this.formBuilder.group({
+    this.editorForm = this.formBuilder.group({
       content: this.article.articleData
-    });    
+    });
+    
+    this.titleForm = this.formBuilder.group({
+      title: this.article.articleTitle
+    });
   }
   
-  onSubmit (formData:any) {
-    this.article.articleData = formData["content"];
-    this.articleService.saveArticle(this.article.articleId, this.article);
+  saveArticle () {
+    this.article.articleTitle = this.titleForm.value.title;
+    this.article.articleData = this.editorForm.value.content;
+    this.articleService.saveArticle(this.article);
   }
-
 
 }

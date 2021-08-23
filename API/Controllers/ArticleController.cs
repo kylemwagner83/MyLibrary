@@ -77,12 +77,12 @@ namespace API.Controllers
         }
 
         [HttpPost("{articleId}")]
-        public void UpdateArticle(int articleId, Article article) // This should probably return something
+        public void UpdateArticle(Article article) // This should probably return something
         {
             try
             {
                 conn.Open();
-                string sql = $"UPDATE Article SET ArticleData = '{article.ArticleData}' WHERE ArticleId = {article.ArticleId}";
+                string sql = $"UPDATE Article SET ArticleData = '{article.ArticleData}', ArticleTitle = '{article.ArticleTitle}' WHERE ArticleId = {article.ArticleId}";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
             }
@@ -99,7 +99,7 @@ namespace API.Controllers
             try
             {
                 conn.Open();
-                string sql = $"insert into Article (ArticleId, ArticleTitle, ArticleData, SeriesId, SeriesPosition, CategoryId) values ({article.ArticleId}, '{article.ArticleTitle}', '{article.ArticleData}', {article.SeriesId}, {article.SeriesPosition}, {article.CategoryId});";
+                string sql = $"INSERT into Article (ArticleId, ArticleTitle, ArticleData, SeriesId, SeriesPosition, CategoryId) values ({article.ArticleId}, '{article.ArticleTitle}', '{article.ArticleData}', {article.SeriesId}, {article.SeriesPosition}, {article.CategoryId});";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
             }

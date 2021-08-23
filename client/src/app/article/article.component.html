@@ -1,27 +1,25 @@
 <div class="container">
-    <h2>
-      {{article.articleTitle}}
-    </h2>
+  
+    <form [formGroup]="titleForm">
+      <input type="text"formControlName="title" style="font-size: larger; font-weight: bold;">
+    </form>
+
     <p>
-      Article ID# {{article.articleId}}
+      Article ID# {{article.articleId}} 
+      -- Series ID# {{article.seriesId}} 
+      -- Series Position# {{article.seriesPosition}} 
+      -- Category ID# {{article.categoryId}}
     </p>
-    <p>
-      Series ID# {{article.seriesId}}
-    </p>
-    <p>
-      Series Position# {{article.seriesPosition}}
-    </p>
-    <p>
-      Category ID# {{article.categoryId}}
-    </p>
-    
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)">
-      <div class="form-group">
+
+    <button class="btn btn-dark" (click)="saveArticle()">Save</button>
+
+    <form [formGroup]="editorForm">
+      <div class="form-group mt-3">
         <editor 
             formControlName='content' 
             apiKey="k1pqab9inei7an7n3atynsphluumlmwkih79kuzncj48xh3y" 
             [init]="{      
-                height: 500,
+                height: h - 250,
                 menubar: false,
                 plugins: 'advlist autolink code hr image imagetools lists wordcount',
                 toolbar: 'undo redo | formatselect | bold italic underline backcolor | \
@@ -31,6 +29,6 @@
         >
         </editor>
       </div>
-      <button class="btn btn-dark" type="submit">Submit Form</button>
     </form>
+    <button class="btn btn-dark" (click)="saveArticle()">Save</button>
   </div>
