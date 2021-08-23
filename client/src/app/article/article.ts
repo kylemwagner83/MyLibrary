@@ -5,4 +5,5 @@ export interface IArticle {
     seriesId: number;
     seriesPosition: number;
     categoryId: number;
+    modified: string;
 }

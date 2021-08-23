@@ -1,3 +1,5 @@
+using System;
+
 namespace API.Entities
 {
     public class Article
@@ -8,5 +10,6 @@ namespace API.Entities
         public int SeriesId { get; set; }
         public int SeriesPosition { get; set; }
         public int CategoryId { get; set; }
+        public string Modified { get; set; }
     }
 }

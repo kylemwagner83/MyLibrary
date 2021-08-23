@@ -1,12 +1,10 @@
 Features to be implemented
 
-- Edit article title
-- Edit article category, edit categories list
-- Create new aritcle in series, add series title?
+- Edit article category, edit categories
+- Create new series/Create new aritcle in series
     - Edit seriesId/seriesPosition?
 
 
 Known Issues
 
 - No warning when approaching/exceeding char limit
-- ??If save fails, page still reloads and any updated content is lost

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
@@ -24,7 +25,7 @@ namespace API.Controllers
             try
             {
                 conn.Open();
-                string sql = $"SELECT ArticleId, ArticleTitle, SeriesId, SeriesPosition, CategoryId FROM Article";
+                string sql = $"SELECT ArticleId, ArticleTitle, SeriesId, SeriesPosition, CategoryId, Modified FROM Article";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -35,6 +36,7 @@ namespace API.Controllers
                     currentArticle.SeriesId = Convert.ToInt32(rdr[2]);
                     currentArticle.SeriesPosition = Convert.ToInt32(rdr[3]);
                     currentArticle.CategoryId = Convert.ToInt32(rdr[4]);
+                    currentArticle.Modified = rdr[5].ToString();
                     articleList.Add(currentArticle);
                 }
                 rdr.Close();
@@ -54,7 +56,7 @@ namespace API.Controllers
             try
             {
                 conn.Open();
-                string sql = $"SELECT ArticleTitle, ArticleData, SeriesId, SeriesPosition, CategoryId FROM Article WHERE ArticleId = {articleId}";
+                string sql = $"SELECT ArticleTitle, ArticleData, SeriesId, SeriesPosition, CategoryId, Modified FROM Article WHERE ArticleId = {articleId}";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -65,6 +67,7 @@ namespace API.Controllers
                     currentArticle.SeriesId = Convert.ToInt32(rdr[2]);
                     currentArticle.SeriesPosition = Convert.ToInt32(rdr[3]);
                     currentArticle.CategoryId = Convert.ToInt32(rdr[4]);
+                    currentArticle.Modified = rdr[5].ToString();
                 }
                 rdr.Close();
             }
@@ -99,7 +102,7 @@ namespace API.Controllers
             try
             {
                 conn.Open();
-                string sql = $"INSERT into Article (ArticleId, ArticleTitle, ArticleData, SeriesId, SeriesPosition, CategoryId) values ({article.ArticleId}, '{article.ArticleTitle}', '{article.ArticleData}', {article.SeriesId}, {article.SeriesPosition}, {article.CategoryId});";
+                string sql = $"INSERT into Article (ArticleId, ArticleTitle, ArticleData, SeriesId, SeriesPosition, CategoryId, Modified) values ({article.ArticleId}, '{article.ArticleTitle}', '{article.ArticleData}', {article.SeriesId}, {article.SeriesPosition}, {article.CategoryId}, '{article.Modified}');";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
             }
