@@ -82,12 +82,13 @@ namespace API.Controllers
         }
 
         [HttpPost("{articleId}")]
-        public void UpdateArticle(Article article) // This should probably return something
+        public void UpdateArticle(Article article)
         {
             try
             {
+                article.Modified = article.Modified.Remove(article.Modified.Length -3); // Removes AM/PM from datetime string so MySQL can read it
                 conn.Open();
-                string sql = $"UPDATE Article SET ArticleData = '{article.ArticleData}', ArticleTitle = '{article.ArticleTitle}' WHERE ArticleId = {article.ArticleId}";
+                string sql = $"UPDATE Article SET ArticleData = '{article.ArticleData}', ArticleTitle = '{article.ArticleTitle}', Modified = '{article.Modified}' WHERE ArticleId = {article.ArticleId}";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
             }

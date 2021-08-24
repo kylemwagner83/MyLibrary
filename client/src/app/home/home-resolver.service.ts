@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators'
-import { ArticleService } from '../article/article.service';
+import { ArticleService } from '../shared/article.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IArticle } from '../article/article';
-import { ArticleService } from '../article/article.service';
+import { IArticle } from '../shared/article';
+import { ArticleService } from '../shared/article.service';
+import { DatetimeService } from '../shared/datetime.service';
+
 
 @Component({
   selector: 'app-home',
@@ -15,7 +17,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private dateTimeService: DatetimeService
     ) { }
 
   ngOnInit(): void {
@@ -34,32 +37,6 @@ export class HomeComponent implements OnInit {
   }
 
   createNewArticle() {
-    var date = new Date();
-    var amPm = "AM";
-    
-    function addZero(x:number) {
-      let y = x.toString();
-      if (x < 10) {
-        y = "0" + y;
-      }
-      return y;
-    }
-
-    function checkAmPm(x:number) {
-      if (x > 12) {
-        x = x - 12;
-        amPm = "PM";
-      }
-      return x;
-    }
-
-    var currentDateTime = 
-      (date.getFullYear()) + "-" +
-      (addZero(date.getMonth()+1)) + "-" + 
-      addZero(date.getDate()) + " " +
-      checkAmPm(date.getHours()) + ":" + 
-      addZero(date.getMinutes()) + ":" + 
-      addZero(date.getSeconds());
 
     const article: IArticle = {
       articleId: this.latestArticleId + 1,
@@ -68,7 +45,7 @@ export class HomeComponent implements OnInit {
       seriesId: 1,
       seriesPosition: 1,
       categoryId: 1,
-      modified: currentDateTime
+      modified: this.dateTimeService.getCurrentDateTime()
     }    
     this.articleService.createNewArticle(article)
   }

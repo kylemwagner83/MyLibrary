@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IArticle } from './article';
+import { IArticle } from '../shared/article';
 import { FormBuilder } from '@angular/forms';
-import { ArticleService } from './article.service';
+import { ArticleService } from '../shared/article.service';
+import { DatetimeService } from '../shared/datetime.service';
 
 @Component({
   selector: 'app-article',
@@ -19,7 +20,8 @@ export class ArticleComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private dateTimeService: DatetimeService
     ) {
    }
 
@@ -40,6 +42,7 @@ export class ArticleComponent implements OnInit {
   saveArticle () {
     this.article.articleTitle = this.titleForm.value.title;
     this.article.articleData = this.editorForm.value.content;
+    this.article.modified = this.dateTimeService.getCurrentDateTime();
     this.articleService.saveArticle(this.article);
   }
 
