@@ -11,6 +11,7 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 const routes: Routes = [
   { path: 'article-component', component: ArticleComponent }
@@ -32,7 +33,8 @@ const routes: Routes = [
     RouterModule,
     EditorModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ],
   exports: [
     RouterModule

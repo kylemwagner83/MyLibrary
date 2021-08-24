@@ -33,9 +33,7 @@ export class DatetimeService {
         addZero(date.getDate()) + " " +
         checkAmPm(date.getHours()) + ":" +
         addZero(date.getMinutes()) + ":" +
-        addZero(date.getSeconds()) + " " +
-        amPm;
-        ;
+        addZero(date.getSeconds());
   
     return currentDateTime;
   }

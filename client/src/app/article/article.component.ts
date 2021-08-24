@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IArticle } from '../shared/article';
 import { FormBuilder } from '@angular/forms';
 import { ArticleService } from '../shared/article.service';
 import { DatetimeService } from '../shared/datetime.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
 
 @Component({
   selector: 'app-article',
@@ -15,13 +17,15 @@ export class ArticleComponent implements OnInit {
   article!: IArticle;
   editorForm:any;
   titleForm:any;
-  h = window.innerHeight; 
+  h = window.innerHeight;
+  modalRef!: BsModalRef;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private articleService: ArticleService,
-    private dateTimeService: DatetimeService
+    private dateTimeService: DatetimeService,
+    private modalService: BsModalService
     ) {
    }
 
@@ -45,5 +49,20 @@ export class ArticleComponent implements OnInit {
     this.article.modified = this.dateTimeService.getCurrentDateTime();
     this.articleService.saveArticle(this.article);
   }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+  }
+ 
+  confirm(): void {
+    this.articleService.deleteArticle(this.article);
+    this.modalRef.hide();
+  }
+ 
+  decline(): void {
+    this.modalRef.hide();
+  }
+
+
 
 }

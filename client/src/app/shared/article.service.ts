@@ -1,5 +1,6 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IArticle } from './article';
 
@@ -10,7 +11,10 @@ import { IArticle } from './article';
 export class ArticleService {
   url = "https://localhost:5001/api/article/";
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+    ) { }
 
   getArticle(id:any): Observable<any> {
     return this.http.get(this.url + id);
@@ -27,6 +31,12 @@ export class ArticleService {
   createNewArticle(content:IArticle) {
     this.http.post(this.url, content).subscribe(x => {
       window.location.reload();
+    });
+  }
+
+  deleteArticle(article:IArticle) {
+    this.http.delete(this.url + article.articleId).subscribe(x => {
+      this.router.navigate(["/"]);
     });
   }
 }

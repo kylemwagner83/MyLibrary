@@ -8,3 +8,5 @@ Features to be implemented
 Known Issues
 
 - No warning when approaching/exceeding char limit
+- AM/PM designation disappears in article view after save (shows after refresh)
+    - Can't save to MySQL with AM/PM designation?

@@ -86,7 +86,7 @@ namespace API.Controllers
         {
             try
             {
-                article.Modified = article.Modified.Remove(article.Modified.Length -3); // Removes AM/PM from datetime string so MySQL can read it
+                // article.Modified = article.Modified.Remove(article.Modified.Length -3); // Removes AM/PM from datetime string so MySQL can read it
                 conn.Open();
                 string sql = $"UPDATE Article SET ArticleData = '{article.ArticleData}', ArticleTitle = '{article.ArticleTitle}', Modified = '{article.Modified}' WHERE ArticleId = {article.ArticleId}";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
@@ -115,6 +115,22 @@ namespace API.Controllers
             }
             conn.Close();
             return Ok(article);
+        }
+
+        [HttpDelete("{articleId}")]
+        public void DeleteArticle(int articleId) {
+            try
+            {
+                conn.Open();
+                string sql = $"DELETE from Article WHERE ArticleId = {articleId}";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            conn.Close();
         }
 
 
