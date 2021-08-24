@@ -4,6 +4,8 @@
     <a class="navlink" 
         [routerLink]="['../article-component', article.articleId]" 
         routerLinkActive='active'
-    >{{article.articleTitle}}
+    >
+    {{article.articleTitle}}
+    -- {{article.modified}}
     </a>
 </div>

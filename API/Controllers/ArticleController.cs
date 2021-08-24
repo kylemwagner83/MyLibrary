@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
@@ -46,6 +47,7 @@ namespace API.Controllers
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
+            articleList = articleList.OrderByDescending(x => x.Modified).ToList();
             return articleList;
         }
 

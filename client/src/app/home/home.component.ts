@@ -26,7 +26,11 @@ export class HomeComponent implements OnInit {
   }
 
   findLatestArticleId() {
-    this.latestArticleId = this.articleList[this.articleList.length - 1].articleId;
+    this.articleList.forEach(element => {
+      if(element.articleId > this.latestArticleId) {
+        this.latestArticleId = element.articleId
+      }
+    });
   }
 
   createNewArticle() {
