@@ -46,7 +46,8 @@ export class HomeComponent implements OnInit {
       seriesPosition: 1,
       categoryId: 1,
       modified: this.dateTimeService.getCurrentDateTime()
-    }    
+      // modified: '2022-08-24T13:33:05'
+    }
     this.articleService.createNewArticle(article)
   }
 

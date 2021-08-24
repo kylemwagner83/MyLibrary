@@ -9,7 +9,6 @@ export class DatetimeService {
 
   getCurrentDateTime() {
     var date = new Date();
-    var amPm = "AM";
   
     function addZero(x: number) {
         let y = x.toString();
@@ -18,26 +17,17 @@ export class DatetimeService {
         }
         return y;
     }
-  
-    function checkAmPm(x: number) {
-        if (x > 12) {
-            x = x - 12;
-            amPm = "PM";
-        }
-        return x;
-    }
-  
+    
     var currentDateTime =
         (date.getFullYear()) + "-" +
         (addZero(date.getMonth() + 1)) + "-" +
-        addZero(date.getDate()) + " " +
-        checkAmPm(date.getHours()) + ":" +
+        addZero(date.getDate()) + "T" +
+        date.getHours() + ":" +
         addZero(date.getMinutes()) + ":" +
         addZero(date.getSeconds());
-  
+
     return currentDateTime;
   }
-
 
 }
 

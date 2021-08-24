@@ -26,7 +26,8 @@ namespace API.Controllers
             try
             {
                 conn.Open();
-                string sql = $"SELECT ArticleId, ArticleTitle, SeriesId, SeriesPosition, CategoryId, Modified FROM Article";
+                // string sql = $"SELECT ArticleId, ArticleTitle, SeriesId, SeriesPosition, CategoryId, Modified FROM Article";
+                string sql = $"SELECT ArticleId, ArticleTitle, SeriesId, SeriesPosition, CategoryId, (Modified) FROM Article";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -37,7 +38,9 @@ namespace API.Controllers
                     currentArticle.SeriesId = Convert.ToInt32(rdr[2]);
                     currentArticle.SeriesPosition = Convert.ToInt32(rdr[3]);
                     currentArticle.CategoryId = Convert.ToInt32(rdr[4]);
-                    currentArticle.Modified = rdr[5].ToString();
+                    currentArticle.Modified = Convert.ToDateTime(rdr[5].ToString());
+                    // currentArticle.Modified = rdr[5].ToString();
+                    
                     articleList.Add(currentArticle);
                 }
                 rdr.Close();
@@ -69,7 +72,7 @@ namespace API.Controllers
                     currentArticle.SeriesId = Convert.ToInt32(rdr[2]);
                     currentArticle.SeriesPosition = Convert.ToInt32(rdr[3]);
                     currentArticle.CategoryId = Convert.ToInt32(rdr[4]);
-                    currentArticle.Modified = rdr[5].ToString();
+                    currentArticle.Modified = Convert.ToDateTime(rdr[5].ToString());
                 }
                 rdr.Close();
             }
@@ -86,9 +89,8 @@ namespace API.Controllers
         {
             try
             {
-                // article.Modified = article.Modified.Remove(article.Modified.Length -3); // Removes AM/PM from datetime string so MySQL can read it
                 conn.Open();
-                string sql = $"UPDATE Article SET ArticleData = '{article.ArticleData}', ArticleTitle = '{article.ArticleTitle}', Modified = '{article.Modified}' WHERE ArticleId = {article.ArticleId}";
+                string sql = $"UPDATE Article SET ArticleData = '{article.ArticleData}', ArticleTitle = '{article.ArticleTitle}', Modified = '{article.Modified.ToString("yyyy-MM-dd HH:mm:ss")}' WHERE ArticleId = {article.ArticleId}";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
             }
@@ -105,7 +107,7 @@ namespace API.Controllers
             try
             {
                 conn.Open();
-                string sql = $"INSERT into Article (ArticleId, ArticleTitle, ArticleData, SeriesId, SeriesPosition, CategoryId, Modified) values ({article.ArticleId}, '{article.ArticleTitle}', '{article.ArticleData}', {article.SeriesId}, {article.SeriesPosition}, {article.CategoryId}, '{article.Modified}');";
+                string sql = $"INSERT into Article (ArticleId, ArticleTitle, ArticleData, SeriesId, SeriesPosition, CategoryId, Modified) values ({article.ArticleId}, '{article.ArticleTitle}', '{article.ArticleData}', {article.SeriesId}, {article.SeriesPosition}, {article.CategoryId}, '{article.Modified.ToString("yyyy-MM-dd HH:mm:ss")}');";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
             }
@@ -114,6 +116,8 @@ namespace API.Controllers
                 Console.WriteLine(ex.ToString());
             }
             conn.Close();
+
+
             return Ok(article);
         }
 
