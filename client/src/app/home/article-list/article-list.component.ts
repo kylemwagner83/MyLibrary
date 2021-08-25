@@ -17,7 +17,7 @@ export class ArticleListComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private articleService: ArticleService,
     private dateTimeService: DatetimeService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe((response: any) => {
@@ -35,7 +35,6 @@ export class ArticleListComponent implements OnInit {
   }
 
   createNewArticle() {
-
     const article: IArticle = {
       articleId: this.latestArticleId + 1,
       articleTitle: "New article",
@@ -44,10 +43,8 @@ export class ArticleListComponent implements OnInit {
       seriesPosition: 1,
       categoryId: 1,
       modified: this.dateTimeService.getCurrentDateTime()
-      // modified: '2022-08-24T13:33:05'
     }
-    console.log(article.modified);
-    this.articleService.createNewArticle(article)
+    this.articleService.createNewArticle(article);
   }
 
 }

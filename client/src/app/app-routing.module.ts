@@ -5,11 +5,12 @@ import { ArticleListResolverService } from './home/article-list/article-list-res
 import { ArticleComponent } from './article/article.component';
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { SeriesListResolverService } from './home/series-list/series-list-resolver.service';
 
 const routes: Routes = [
   { path: 'article-component/:id', component: ArticleComponent, resolve: {article: ArticleResolverService} },
-  { path: 'home-component', component: HomeComponent, resolve: {article: ArticleListResolverService} },
-  { path: '', component: HomeComponent, resolve: {article: ArticleListResolverService} },
+  { path: 'home-component', component: HomeComponent, resolve: {article: ArticleListResolverService, series: SeriesListResolverService} },
+  { path: '', component: HomeComponent, resolve: {article: ArticleListResolverService, series: SeriesListResolverService} },
   { path: '**', component: NotfoundComponent },
 ];
 

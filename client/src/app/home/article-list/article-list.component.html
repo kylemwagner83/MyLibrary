@@ -1,13 +1,14 @@
-<h3 class="text-center mb-4">Most recent articles</h3>
+<h2 class="text-center mb-4">Articles</h2>
 <button (click)="createNewArticle()" class="mb-3">Create new article</button>
 <div class="container" style="max-height: 75vh; overflow-y: scroll;">
-    <div *ngFor="let article of articleList" class="mb-2">
+    <div *ngFor="let article of articleList" class="mb-4">
         <a class="navlink" 
             [routerLink]="['../article-component', article.articleId]" 
             routerLinkActive='active'
+            style="font-size: larger;"
         >
         {{article.articleTitle}}<br>
-        &nbsp;&nbsp; Modified: {{article.modified}}
         </a>
+        &nbsp;&nbsp; <span style="font-size: smaller;">Modified: {{article.modified}}</span>
     </div>
 </div>
