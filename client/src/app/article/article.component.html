@@ -1,48 +1,42 @@
 <div class="container">
-  
-    <form [formGroup]="titleForm">
-      <input type="text"formControlName="title" style="font-size: larger; font-weight: bold;">
-    </form>
 
-    <p>
-      Article ID# {{article.articleId}} 
-      -- Series ID# {{article.seriesId}} 
-      -- Series Position# {{article.seriesPosition}} 
-      -- Category ID# {{article.categoryId}}
-      -- Modified {{article.modified}}
-    </p>
+  <form [formGroup]="titleForm">
+    <input type="text" formControlName="title" style="font-size: larger; font-weight: bold;">
+  </form>
 
-    <button class="btn btn-dark" (click)="saveArticle()">Save</button>
+  <p class="mt-2">-- Category ID# {{article.categoryId}}</p>
 
+  <button class="btn btn-dark" (click)="saveArticle()">Save</button>
+  <p class="d-inline ml-3">Last saved: {{article.modified}}</p>
 
-    <button type="button" class="btn btn-dark float-right" (click)="openModal(template)">Delete Article</button>
-    <ng-template #template>
-      <div class="modal-body text-center">
-        <p>Are you sure you want to delete this article?</p>
-        <button type="button" class="btn btn-danger mr-4" (click)="confirm()">Yes</button>
-        <button type="button" class="btn btn-dark" (click)="decline()">No</button>
-      </div>
-    </ng-template>
+  <button type="button" class="btn btn-dark float-right" (click)="openModal(template)">Delete Article</button>
+  <ng-template #template>
+    <div class="modal-body text-center">
+      <p>Are you sure you want to delete this article?</p>
+      <button type="button" class="btn btn-danger mr-4" (click)="confirm()">Yes</button>
+      <button type="button" class="btn btn-dark" (click)="decline()">No</button>
+    </div>
+  </ng-template>
 
 
+  <p class="mt-2">
+    -- Series ID# {{article.seriesId}}
+    -- Series Position# {{article.seriesPosition}}
+  </p>
 
-    <form [formGroup]="editorForm">
-      <div class="form-group mt-3">
-        <editor 
-            formControlName='content' 
-            apiKey="k1pqab9inei7an7n3atynsphluumlmwkih79kuzncj48xh3y" 
-            [init]="{      
-                height: h - 250,
+  <form [formGroup]="editorForm">
+    <div class="form-group mt-3">
+      <editor formControlName='content' apiKey="k1pqab9inei7an7n3atynsphluumlmwkih79kuzncj48xh3y" [init]="{      
+                height: h - 325,
                 menubar: false,
                 plugins: 'advlist autolink code hr image imagetools lists wordcount',
                 toolbar: 'undo redo | formatselect | bold italic underline backcolor | \
                     alignleft aligncenter alignright alignjustify | \
                     bullist numlist outdent indent | removeformat hr| code | wordcount'
-            }"
-        >
-        </editor>
-      </div>
-    </form>
-    <button class="btn btn-dark" (click)="saveArticle()">Save</button>
-  </div>
-
+            }">
+      </editor>
+    </div>
+  </form>
+  <button class="btn btn-dark" (click)="saveArticle()">Save</button>
+  <p class="d-inline ml-3">Last saved: {{article.modified}}</p>
+</div>

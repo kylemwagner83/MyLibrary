@@ -20,9 +20,9 @@ export class DatetimeService {
     
     var currentDateTime =
         (date.getFullYear()) + "-" +
-        (addZero(date.getMonth() + 1)) + "-" +
+        addZero(date.getMonth() + 1) + "-" +
         addZero(date.getDate()) + "T" +
-        date.getHours() + ":" +
+        addZero(date.getHours()) + ":" +
         addZero(date.getMinutes()) + ":" +
         addZero(date.getSeconds());
 

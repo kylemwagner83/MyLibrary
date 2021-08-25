@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators'
-import { ArticleService } from '../shared/article.service';
+import { catchError } from 'rxjs/operators';
+import { ArticleService } from 'src/app/shared/article.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class HomeResolverService implements Resolve<any> {
+export class ArticleListResolverService implements Resolve<any> {
 
   constructor(private article: ArticleService) { }
 

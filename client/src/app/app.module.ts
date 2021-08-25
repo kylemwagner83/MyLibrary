@@ -12,6 +12,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ArticleListComponent } from './home/article-list/article-list.component';
+import { SeriesListComponent } from './home/series-list/series-list.component';
 
 const routes: Routes = [
   { path: 'article-component', component: ArticleComponent }
@@ -23,7 +25,9 @@ const routes: Routes = [
     ArticleComponent,
     HomeComponent,
     SideNavComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    ArticleListComponent,
+    SeriesListComponent
   ],
   imports: [
     BrowserModule,

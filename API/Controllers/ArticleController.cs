@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -26,8 +25,7 @@ namespace API.Controllers
             try
             {
                 conn.Open();
-                // string sql = $"SELECT ArticleId, ArticleTitle, SeriesId, SeriesPosition, CategoryId, Modified FROM Article";
-                string sql = $"SELECT ArticleId, ArticleTitle, SeriesId, SeriesPosition, CategoryId, (Modified) FROM Article";
+                string sql = $"SELECT ArticleId, ArticleTitle, SeriesId, SeriesPosition, CategoryId, Modified FROM Article";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -39,8 +37,6 @@ namespace API.Controllers
                     currentArticle.SeriesPosition = Convert.ToInt32(rdr[3]);
                     currentArticle.CategoryId = Convert.ToInt32(rdr[4]);
                     currentArticle.Modified = Convert.ToDateTime(rdr[5].ToString());
-                    // currentArticle.Modified = rdr[5].ToString();
-                    
                     articleList.Add(currentArticle);
                 }
                 rdr.Close();
