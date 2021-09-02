@@ -24,6 +24,11 @@ export class SeriesService {
     });
   }
 
+  createNewSeriesInEdit(series:ISeries) {
+    this.http.post(this.url, series).subscribe(x => {
+    });
+  }
+
   updateSeries(series:ISeries) {
     this.http.post(this.url + series.seriesId, series).subscribe();
   }

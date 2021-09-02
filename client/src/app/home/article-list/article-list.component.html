@@ -1,5 +1,8 @@
 <h2 class="text-center mb-4">Articles</h2>
-<button (click)="createNewArticle()" class="mb-3">Create new article</button>
+<div class="col text-center">
+    <button (click)="createNewArticle()" class="btn btn-dark mb-3">Create new article</button>
+</div>
+
 <div class="container" style="max-height: 75vh; overflow-y: scroll;">
     <div *ngFor="let article of articleList" class="mb-4">
         <a class="navlink" 

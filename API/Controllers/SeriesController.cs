@@ -19,21 +19,25 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public List<Series> GetArticlesWithoutContent()
+        public List<ArticlesInSeries> GetSeriesList()
         {
-            List<Series> seriesList = new List<Series>();
+            List<ArticlesInSeries> seriesList = new List<ArticlesInSeries>();
             try
             {
                 conn.Open();
-                string sql = $"SELECT SeriesId, SeriesTitle, Modified FROM Series";
+                // string sql = $"SELECT SeriesId, SeriesTitle, Modified FROM Series";
+                string sql = $"SELECT Series.SeriesId, SeriesTitle, ArticleId, ArticleTitle, SeriesPosition, Series.Modified FROM Article INNER JOIN Series ON Article.SeriesID = Series.SeriesID";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    Series currentSeries = new Series();
+                    ArticlesInSeries currentSeries = new ArticlesInSeries();
                     currentSeries.SeriesId = Convert.ToInt32(rdr[0]);
                     currentSeries.SeriesTitle = rdr[1].ToString();
-                    currentSeries.Modified = Convert.ToDateTime(rdr[2].ToString());
+                    currentSeries.ArticleId = Convert.ToInt32(rdr[2]);
+                    currentSeries.ArticleTitle = rdr[3].ToString();
+                    currentSeries.SeriesPosition = Convert.ToInt32(rdr[4]);
+                    currentSeries.Modified = Convert.ToDateTime(rdr[5].ToString());
                     seriesList.Add(currentSeries); // omit 'not in series'?
                 }
                 rdr.Close();
@@ -46,6 +50,20 @@ namespace API.Controllers
             seriesList = seriesList.OrderByDescending(x => x.Modified).ToList();
             return seriesList;
         }
+
+
+
+
+        
+
+        [HttpGet("{seriesId}")]
+        public void GetArticlesInSeriesById()
+        {
+            System.Console.WriteLine("At get series by ID controller");
+        }
+
+
+
 
         [HttpPost]
         public IActionResult CreateNewSeries(Series series)

@@ -54,12 +54,12 @@ export class ArticleComponent implements OnInit {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
  
-  confirm(): void {
+  confirmDeleteArticle(): void {
     this.articleService.deleteArticle(this.article);
     this.modalRef.hide();
   }
  
-  decline(): void {
+  declineDeleteArticle(): void {
     this.modalRef.hide();
   }
 

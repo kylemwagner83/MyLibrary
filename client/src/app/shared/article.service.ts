@@ -34,6 +34,12 @@ export class ArticleService {
     });
   }
 
+  appendNewArticle(content:IArticle) {
+    this.http.post(this.url, content).subscribe(x => {
+      this.router.navigate(["article-component/" + content.articleId]);
+    });
+  }
+
   deleteArticle(article:IArticle) {
     this.http.delete(this.url + article.articleId).subscribe(x => {
       this.router.navigate(["/"]);

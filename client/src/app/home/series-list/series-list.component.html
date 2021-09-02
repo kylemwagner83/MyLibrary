@@ -1,10 +1,23 @@
 <h2 class="text-center mb-4">Series</h2>
 
-<button (click)="createNewSeries()" class="mb-3">Create new series</button>
+<div class="col text-center">
+    <button (click)="createNewSeries()" class="btn btn-dark mb-3">Create new series</button>
+</div>
 
 <div class="container" style="max-height: 75vh; overflow-y: scroll;">
     <div *ngFor="let series of seriesList" class="mb-4">
         <span style="font-size: larger;">{{series.seriesTitle}}<br></span>
-        <span style="font-size: smaller;">&nbsp;&nbsp; Modified: {{series.modified}}</span>
+        <span style="font-size: smaller;">&nbsp;&nbsp; Modified: {{series.modified}}</span><br>
+        <button (click)="openAppendArticleModal(AppendTemplate, series.seriesId)" class="btn btn-dark">Append New Article -- ID#{{series.seriesId}}</button>
     </div>
 </div>
+
+
+<ng-template #AppendTemplate>
+    <div class="modal-body">
+        <form [formGroup]="newArticleTitle">
+            <input type="text" formControlName="newArticleTitle">
+            <button class="btn btn-dark" (click)="appendNewArticle()">Create new article</button>
+        </form>
+    </div>
+  </ng-template>

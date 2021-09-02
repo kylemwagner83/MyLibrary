@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ArticleListComponent } from './home/article-list/article-list.component';
 import { SeriesListComponent } from './home/series-list/series-list.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 const routes: Routes = [
   { path: 'article-component', component: ArticleComponent }
@@ -38,7 +39,8 @@ const routes: Routes = [
     EditorModule,
     FormsModule,
     ReactiveFormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
   exports: [
     RouterModule

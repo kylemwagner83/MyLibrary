@@ -3,10 +3,11 @@ Features to be implemented
 - Edit article category, edit categories
 - Create new series/Create new aritcle in series
     - Edit seriesId/seriesPosition?
+- Add warning when approaching/exceeding char limit
+- Add warning when navigating away from unsaved article
+- Make last modified datetime more readable on frontend
+
 
 
 Known Issues
 
-- No warning when approaching/exceeding char limit
-- AM/PM designation disappears in article view after save (shows after refresh)
-    - Can't save to MySQL with AM/PM designation?

@@ -8,7 +8,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { SeriesListResolverService } from './home/series-list/series-list-resolver.service';
 
 const routes: Routes = [
-  { path: 'article-component/:id', component: ArticleComponent, resolve: {article: ArticleResolverService} },
+  { path: 'article-component/:id', component: ArticleComponent, resolve: {article: ArticleResolverService, series: SeriesListResolverService} },
   { path: 'home-component', component: HomeComponent, resolve: {article: ArticleListResolverService, series: SeriesListResolverService} },
   { path: '', component: HomeComponent, resolve: {article: ArticleListResolverService, series: SeriesListResolverService} },
   { path: '**', component: NotfoundComponent },
