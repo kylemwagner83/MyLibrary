@@ -1,11 +1,12 @@
 Features to be implemented
 
-- Edit article category, edit categories
-- Create new series/Create new aritcle in series
+- Series navigation in article page (first/last, back/forward, dropdown)
+- Create new series
     - Edit seriesId/seriesPosition?
+- Make last modified datetime more readable on frontend
 - Add warning when approaching/exceeding char limit
 - Add warning when navigating away from unsaved article
-- Make last modified datetime more readable on frontend
+- Edit article category, add/edit categories
 
 
 
